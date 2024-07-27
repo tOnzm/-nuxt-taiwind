@@ -9,6 +9,19 @@ export default {
         './nuxt.config.{js,ts}',
     ],
     theme: {
+        container: {
+            center: true,
+        },
+        borderWidth: {
+            DEFAULT: '0.1px',
+            0: '0',
+            2: '2px',
+            3: '3px',
+            4: '4px',
+            6: '6px',
+            8: '8px',
+        },
+
         extend: {},
         colors: {
             transparent: 'transparent',
@@ -23,6 +36,7 @@ export default {
             bermuda: '#78dcca',
             primary: '#FB6445',
             black: '#000000',
+            gray200: '#e5e7eb',
         },
         fontFamily: {
             sans: ['Graphik', 'sans-serif'],

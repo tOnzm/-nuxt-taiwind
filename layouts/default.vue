@@ -1,7 +1,9 @@
 <template>
     <div class="bg-shopee">
-        <nav class="container mx-auto flex justify-evenly text-sm text-white">
-            <ul class="item-center gap-4 md:flex">
+        <nav
+            class="container mx-auto flex max-w-7xl justify-evenly pt-2 text-sm text-white"
+        >
+            <ul class="item-center flex flex-1 gap-4">
                 <li>Seller Centre</li>
                 <li class="line">|</li>
                 <li>เริ่มต้นขายสินค้า</li>
@@ -17,7 +19,7 @@
                     <li><Icon name="fa-brands:line" /></li>
                 </ul>
             </ul>
-            <ul class="flex items-center gap-4 text-sm">
+            <ul class="flex flex-1 items-center justify-end gap-4 text-sm">
                 <li>
                     <Icon name="fa6-regular:bell" />
                     การแจ้งเตือน
@@ -35,13 +37,15 @@
                 <li>เข้าสู่ระบบ</li>
             </ul>
         </nav>
-        <nav class="flex justify-center">
-            <ul class="flex justify-evenly text-sm text-white">
-                <li class="justify-start">
+        <nav
+            class="container mx-auto flex max-w-7xl grow pb-2.5 pt-2 text-sm text-white"
+        >
+            <ul class="item-center flex grow justify-center">
+                <li class="flex flex-1 justify-start">
                     <img src="/image/shopee_logo.webp" alt="" width="162" />
                 </li>
                 <ul>
-                    <li class="flex pb-1 pt-4">
+                    <li class="flex flex-1 pb-1 pt-4">
                         <SearchBox />
                     </li>
                     <ul class="flex gap-2 text-xs">
@@ -54,14 +58,16 @@
                         <li>ที่นอน 1 บาท</li>
                     </ul>
                 </ul>
-                <li class="justify-end">
+                <li class="flex flex-1 justify-center">
                     <Icon
                         name="ic:outline-shopping-cart"
-                        style="font-size: 26px"
+                        style="font-size: 32px"
                     />
                 </li>
             </ul>
         </nav>
+    </div>
+    <div>
         <slot />
     </div>
 </template>
