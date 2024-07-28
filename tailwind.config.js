@@ -7,6 +7,7 @@ export default {
         './pages/**/*.{js,vue,ts}',
         './plugins/**/*.{js,ts}',
         './nuxt.config.{js,ts}',
+        './node_modules/flowbite/**/*.js',
     ],
     theme: {
         container: {
@@ -43,5 +44,5 @@ export default {
             serif: ['Merriweather', 'serif'],
         },
     },
-    plugins: [],
+    plugins: [require('flowbite/plugin')],
 }
