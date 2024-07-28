@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+import { storeToRefs } from 'pinia' // import storeToRefs helper hook from pinia
+import { useAuthStore } from '@/store/auth' // import the auth store we just created
+
+const router = useRouter()
+
+const { logUserOut } = useAuthStore() // use authenticateUser action from  auth store
+const { authenticated, userProfilePic } = storeToRefs(useAuthStore()) // make authenticated state reactive with storeToRefs
+
+const logout = () => {
+    logUserOut()
+    router.push('/login')
+}
+</script>
+
 <template>
     <div class="bg-shopee">
         <nav
@@ -32,9 +47,21 @@
                     <Icon name="hugeicons:globe-02" />
                     ไทย
                 </li>
-                <li>สมัครใหม่</li>
-                <li class="line">|</li>
-                <li>เข้าสู่ระบบ</li>
+                <ul v-if="!authenticated" class="flex gap-2">
+                    <li>สมัครใหม่</li>
+                    <li class="line">|</li>
+                    <li>
+                        <NuxtLink to="/login">เข้าสู่ระบบ</NuxtLink>
+                    </li>
+                </ul>
+                <li v-if="authenticated" class="flex items-center gap-2">
+                    <img
+                        :src="userProfilePic"
+                        alt="User Profile"
+                        class="h-8 w-8 rounded-full"
+                    />
+                    <NuxtLink @click="logout">ออกจากระบบ</NuxtLink>
+                </li>
             </ul>
         </nav>
         <nav

@@ -9,7 +9,7 @@ export default defineNuxtConfig({
         'nuxt-lodash',
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
-        '@nuxtjs/supabase',
+        /* '@nuxtjs/supabase', */
     ],
 
     app: {
@@ -17,4 +17,11 @@ export default defineNuxtConfig({
             script: [{ src: 'https://js.stripe.com/v3/', defer: true }],
         },
     },
+
+    /*     runtimeConfig: {
+        public: {
+            supabaseUrl: process.env.SUPABASE_URL,
+            supabaseKey: process.env.SUPABASE_KEY,
+        },
+    }, */
 })

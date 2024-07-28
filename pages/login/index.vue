@@ -1,5 +1,38 @@
-<script setup>
-const client = useSupabaseClient()
+<script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '~/store/auth'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+
+const authStore = useAuthStore()
+const { authenticateUser } = authStore
+const { authenticated } = storeToRefs(authStore)
+
+const user = ref({
+    username: '',
+    password: '',
+})
+const router = useRouter()
+const errorMessage = ref('')
+const successMessage = ref('')
+
+const login = async () => {
+    errorMessage.value = ''
+    successMessage.value = ''
+    try {
+        await authenticateUser(user.value)
+        if (authenticated.value) {
+            successMessage.value = 'Successfully logged in!'
+            router.push('/')
+        } else {
+            errorMessage.value =
+                'Authentication failed. Please check your credentials.'
+        }
+    } catch (error) {
+        errorMessage.value =
+            'An error occurred during authentication. Please try again.'
+    }
+}
 </script>
 
 <template>
@@ -27,20 +60,24 @@ const client = useSupabaseClient()
                     >
                         Sign in to your account
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="#">
+                    <form
+                        class="space-y-4 md:space-y-6"
+                        @submit.prevent="login"
+                    >
                         <div>
                             <label
-                                for="email"
+                                for="username"
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                                 >Your email</label
                             >
                             <input
-                                type="email"
-                                name="email"
-                                id="email"
+                                v-model="user.username"
+                                type="text"
+                                name="username"
+                                id="username"
                                 class="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                placeholder="name@company.com"
-                                required=""
+                                placeholder="username"
+                                required
                             />
                         </div>
                         <div>
@@ -50,12 +87,13 @@ const client = useSupabaseClient()
                                 >Password</label
                             >
                             <input
+                                v-model="user.password"
                                 type="password"
                                 name="password"
                                 id="password"
                                 placeholder="••••••••"
                                 class="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                                required=""
+                                required
                             />
                         </div>
                         <div class="flex items-center justify-between">
@@ -66,7 +104,6 @@ const client = useSupabaseClient()
                                         aria-describedby="remember"
                                         type="checkbox"
                                         class="focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 h-4 w-4 rounded border border-gray-300 bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800"
-                                        required=""
                                     />
                                 </div>
                                 <div class="ml-3 text-sm">
@@ -79,14 +116,13 @@ const client = useSupabaseClient()
                             </div>
                             <a
                                 href="#"
-                                class="text-primary-600 dark:text-primary-500 text-sm font-medium text-black hover:underline"
+                                class="text-primary-600 dark:text-primary-500 text-sm font-medium hover:underline"
                                 >Forgot password?</a
                             >
                         </div>
                         <button
                             type="submit"
                             class="bg-primary-600 hover:bg-primary-700 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-full rounded-lg px-5 py-2.5 text-center text-sm font-medium text-black focus:outline-none focus:ring-4"
-                            @click="client.auth.signIn"
                         >
                             Sign in
                         </button>
@@ -99,6 +135,12 @@ const client = useSupabaseClient()
                                 class="text-primary-600 dark:text-primary-500 font-medium hover:underline"
                                 >Sign up</a
                             >
+                        </p>
+                        <p v-if="errorMessage" class="text-sm text-red-500">
+                            {{ errorMessage }}
+                        </p>
+                        <p v-if="successMessage" class="text-sm text-green-500">
+                            {{ successMessage }}
                         </p>
                     </form>
                 </div>
