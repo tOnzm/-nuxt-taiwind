@@ -35,13 +35,17 @@ export default {
             silver: '#ecebff',
             'bubble-gum': '#ff77e9',
             bermuda: '#78dcca',
-            primary: '#FB6445',
+            primary: '#ee4d2d',
             black: '#000000',
             gray200: '#e5e7eb',
         },
         fontFamily: {
             sans: ['Graphik', 'sans-serif'],
             serif: ['Merriweather', 'serif'],
+        },
+        backgroundImage: {
+            'hero-pattern':
+                "url('/public/image/sg-11134004-7rd71-lvoblegd0n0l33.png')",
         },
     },
     plugins: [require('flowbite/plugin')],

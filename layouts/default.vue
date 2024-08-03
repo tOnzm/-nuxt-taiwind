@@ -4,6 +4,16 @@ import { useAuthStore } from '@/store/auth' // import the auth store we just cre
 
 const router = useRouter()
 
+const items = [
+    { id: 1, title: 'ลูกค้าใหม่ 1 บาท' },
+    { id: 2, title: 'หูฟังบลูทูธ เบส หนัก ของแท้' },
+    { id: 3, title: 'สินค้า 1 บาท ลูกค้าใหม่เครื่องปั่น' },
+    { id: 4, title: 'ไอโฟนผ่านได้' },
+    { id: 5, title: 'กิ๊บ Sanrio Sakura' },
+    { id: 6, title: 'เสื้อกันหนาวทรงซ้อ' },
+    { id: 7, title: 'ที่นอน 1 บาท' },
+]
+
 const { logUserOut } = useAuthStore() // use authenticateUser action from  auth store
 const { authenticated, userProfilePic } = storeToRefs(useAuthStore()) // make authenticated state reactive with storeToRefs
 
@@ -16,22 +26,22 @@ const logout = () => {
 <template>
     <div class="bg-shopee">
         <nav
-            class="container mx-auto flex max-w-7xl justify-evenly pt-2 text-sm text-white"
+            class="container mx-auto flex max-w-7xl items-center justify-evenly pt-2 text-sm text-white"
         >
             <ul class="item-center flex flex-1 gap-4">
-                <li>Seller Centre</li>
+                <NuxtLink to="/">Seller Centre</NuxtLink>
                 <li class="line">|</li>
-                <li>เริ่มต้นขายสินค้า</li>
+                <NuxtLink to="/">เริ่มต้นขายสินค้า</NuxtLink>
                 <li class="line">|</li>
-                <li>ดาวน์โหลด</li>
+                <NuxtLink to="/">ดาวน์โหลด</NuxtLink>
                 <li class="line">|</li>
-                <li>ติดตามเราบน</li>
+                <NuxtLink to="/">ติดตามเราบน</NuxtLink>
                 <ul class="flex gap-2">
-                    <li><Icon name="fa-brands:facebook" /></li>
-                    <li>
+                    <Nuxtlink><Icon name="fa-brands:facebook" /></Nuxtlink>
+                    <Nuxtlink>
                         <Icon name="streamline:instagram-solid" />
-                    </li>
-                    <li><Icon name="fa-brands:line" /></li>
+                    </Nuxtlink>
+                    <Nuxtlink><Icon name="fa-brands:line" /></Nuxtlink>
                 </ul>
             </ul>
             <ul class="flex flex-1 items-center justify-end gap-4 text-sm">
@@ -44,23 +54,25 @@ const logout = () => {
                     ช่วยเหลือ
                 </li>
                 <li>
-                    <Icon name="hugeicons:globe-02" />
-                    ไทย
+                    <dropdown />
                 </li>
                 <ul v-if="!authenticated" class="flex gap-2">
-                    <li>สมัครใหม่</li>
+                    <NuxtLink to="/">สมัครใหม่</NuxtLink>
                     <li class="line">|</li>
                     <li>
                         <NuxtLink to="/login">เข้าสู่ระบบ</NuxtLink>
                     </li>
                 </ul>
-                <li v-if="authenticated" class="flex items-center gap-2">
+                <li
+                    v-if="authenticated"
+                    class="flex cursor-pointer items-center gap-2"
+                >
                     <img
                         :src="userProfilePic"
                         alt="User Profile"
                         class="h-8 w-8 rounded-full"
                     />
-                    <NuxtLink @click="logout">ออกจากระบบ</NuxtLink>
+                    <NuxtLink @click="logout"> ออกจากระบบ</NuxtLink>
                 </li>
             </ul>
         </nav>
@@ -76,13 +88,11 @@ const logout = () => {
                         <SearchBox />
                     </li>
                     <ul class="flex gap-2 text-xs">
-                        <li>ลูกค้าใหม่ 1 บาท</li>
-                        <li>หูฟังบลูทูธ เบส หนัก ของแท้</li>
-                        <li>สินค้า 1 บาท ลูกค้าใหม่เครื่องปั่น</li>
-                        <li>ไอโฟนผ่านได้</li>
-                        <li>กิ๊บ Sanrio Sakura</li>
-                        <li>เสื้อกันหนาวทรงซ้อ</li>
-                        <li>ที่นอน 1 บาท</li>
+                        <li v-for="item in items" :key="item.id">
+                            <NuxtLink :to="`/${item.id}`">
+                                {{ item.title }}</NuxtLink
+                            >
+                        </li>
                     </ul>
                 </ul>
                 <li class="flex flex-1 justify-center">

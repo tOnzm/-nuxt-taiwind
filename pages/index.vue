@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <ImageSlide />
-    </div>
+    <div><ImageSlide /></div>
 </template>
 
 <script lang="ts" setup></script>
