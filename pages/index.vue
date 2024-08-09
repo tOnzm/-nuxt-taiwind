@@ -1,12 +1,14 @@
 <template>
     <div><ImageSlide /></div>
-    <div>
-        <h1>Movies</h1>
-        <ul class="flex flex-wrap">
-            <li v-for="movie in movies" :key="movie._id">
-                {{ movie.title }} --
-            </li>
-        </ul>
+
+    <div class="flex flex-wrap">
+        <CardMovies
+            v-for="movie in movies"
+            :key="movie._id"
+            :poster="movie.poster"
+            :title="movie.title"
+            :plot="movie.plot"
+        />
     </div>
 </template>
 
