@@ -20,7 +20,7 @@
                 href="#"
                 class="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-                Read more
+                Read more55
                 <svg
                     class="ms-2 h-3.5 w-3.5 rtl:rotate-180"
                     aria-hidden="true"
