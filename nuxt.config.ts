@@ -9,14 +9,33 @@ export default defineNuxtConfig({
         'nuxt-lodash',
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
+        /* 'nuxt-server-utils', */
+        /* '@sidebase/nuxt-auth', */
         /* '@nuxtjs/supabase', */
     ],
+
+    /*   nuxtServerUtils: {
+        mongodbUri: process.env.MONGODB_URL,
+    }, */
+
+    /*   auth: {
+        baseURL: process.env.AUTH_ORIGIN,
+        provider: {
+            type: 'authjs',
+            trustHost: false,
+            defaultProvider: 'github',
+            addDefaultCallbackUrl: true,
+        },
+    }, */
 
     app: {
         head: {
             script: [{ src: 'https://js.stripe.com/v3/', defer: true }],
         },
     },
+    /* nitro: {
+        plugins: ['/server/index.ts'],
+    }, */
 
     /*     runtimeConfig: {
         public: {
